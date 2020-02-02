@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+	function arrays(){
+		var arrayA=[0,1,2,3];
+		arrayA.push(4); //맨뒤에 추가
+		console.log(arrayA);
+		arrayA.pop(); //맨 뒤 항목 제거 후 반환
+		console.log(arrayA);
+		arrayA.unshift(-1); //맨 앞에 추가
+		console.log(arrayA);
+		arrayA.shift(); //맨 앞에 항목제거 후 반환
+		console.log(arrayA);
+		delete arrayA[0];
+		console.log(arrayA);
+	}
+	function splice(){
+		var arrayB = ['one','two','three'];
+		arrayB.splice(1,2); //인덱스 1 위치에서 2개의 항목 제거
+		console.log(arrayB);
+		
+	}
+	function concat(){
+		var arrayC = ['one','two','three'];
+		var arrayD = ['four','five'];
+		var arrayE = arrayC.concat(arrayD); //array연결하기
+		console.log(arrayE);
+		arrayD.push('six');
+		console.log(arrayE);		
+	}
+	function slice(){
+		var arrayF = ['one','two','three'];
+		var arrayG = arrayF.slice(1,2); //원본은 유지하고 인덱스1에서 2개의 항목으로 배열을 만들어 리턴
+		console.log(arrayG);
+	}
+</script>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<input type="button"  value="배열의 메소드" onClick="arrays()"	/>
+	<input type="button"  value="splice" onClick="splice()"	/>	
+	<input type="button"  value="concat" onClick="concat()"	/>	
+	<input type="button"  value="slice" onClick="slice()"	/>			
+</body>
+</html>

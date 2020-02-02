@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+	var counter = (function() { 
+		var id=0;	
+		return{
+			inc : function(){return id++;},
+			"dec":function(){return id--;},
+			"val":function(){return id;}
+		}
+	})(); 
+	
+	function test(){	
+		counter.inc(); // 1증가
+		counter.inc(); // 1증가
+		counter.dec(); // 1감소
+		console.log(counter.val()); // 1출력
+	}
+	
+</script>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<input type="button" value="test" onClick="test()" />
+</body>
+</html>

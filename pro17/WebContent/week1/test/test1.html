@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+//1. 배열a의 각 원소중 filter함수를 만족하는 요소만을 새로운 배열로 리턴
+	function test1(){
+		var numbers=[45,4,9,16,25];
+		console.log(filterArray(numbers,myFunction))
+		function filterArray(/*array*/a, /*Boolean function*/predicate){//데이터타입에 관한 주석을 달아준다.
+			var result=[];
+			for(var i in a){
+				if(predicate(a[i])){
+					result.push(a[i]);
+				}
+			}
+			return result;
+		}
+		function myFunction(value){
+			return value>18;
+		}
+	}
+//2. 배열 a의 각 원소를 지정된 함수f로 전달하여 얻은 결과들을 원소로 하는 배열을 반환
+	function test2(){
+		var numbers=[1,2,3,4,5];
+		console.log(mapArray(numbers,myFunction))
+		function mapArray(/*array*/a, /*function*/f){
+			var result=[];
+			for(var i in a){
+				result.push(myFunction(a[i]))
+			}
+			return result;
+		}
+		function myFunction(value){
+			return value*2;
+		}
+	}
+	
+	function test3(){
+		var star="";
+		for(var i=1; i<=10; i++){
+			for(var j=10; j>i; j-- ){
+				star+=" "
+			}
+			for(var k=1; k<2*i; k++){
+				star+="*"
+			}
+			star+="\n";
+		}
+		console.log(star);
+		alert(star);
+	}
+</script>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<input type="button"  value="test1" onClick="test1()"	/>
+	<input type="button"  value="test2" onClick="test2()"	/>	
+	<input type="button"  value="test3" onClick="test3()"	/>	
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+	function sortkids(e){
+		var ulList = document.getElementById(e).childNodes;
+		var liList=[];
+
+		for(var i in ulList){
+			if(ulList[i].nodeName==="LI"){
+				liList.push(ulList[i]);
+			}
+		}
+		
+		liList.sort(function(a,b){
+			var s=a.innerHTML;
+			var t=b.innerHTML;
+			if(s < t) return -1;  
+			else if(s > t) return 1; 
+			else return 0;
+		})
+		
+		for(var i in liList){
+			document.getElementById(e).appendChild(liList[i]);
+		}
+	}
+</script>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+ <ul id='list'>
+   <li>c</li><li>b</li><li>a</li><li>d</li>
+ </ul>
+ <button onclick="sortkids('list')">Sort list</button>
+</body>
+</html>

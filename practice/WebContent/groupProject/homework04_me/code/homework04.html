@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+	table{
+		display:none;
+		border-collapse:separate;
+	}
+	
+	th{
+		color:rgb(8, 7, 143);
+		text-align:center;
+	}
+	
+	tr:first-of-type th{
+		background-color:rgb(255, 255, 204);
+		font-size: 30px;
+	}
+	
+	tr:nth-of-type(2) th{
+		background-color:rgb(255, 238, 255);
+	}
+	
+	tr:nth-of-type(2) th,td{
+		width:80px;
+		height:70px;
+		padding:5px;
+	}
+	
+	td{
+		text-align:right;
+		vertical-align:top;
+		background-color:rgb(255, 239, 238);
+	}
+</style>
+
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+	$(document).ready(function (){
+		var nowDate;//현재 선택된 시간
+		var inputDate;//폼에서 최초로 넘어온 시간
+		var nowCheck;//최초 입력값 확인 boolean
+		$("#show").click(function (){
+			if(inputCheck()){
+				inputDate=new Date(frmCal.input_date.value);
+				nowDate=inputDate;
+				nowCheck=false;
+				show(inputDate,inputDate,nowCheck);
+			};
+		});
+		
+		$("#show_now").click(function (){
+			inputDate=new Date();
+			nowDate=inputDate;
+			nowCheck=true;
+			show(inputDate,inputDate,nowCheck);
+		});
+		
+		$("#before").click(function (){
+			$("td").parent('tr').remove();
+			nowDate=new Date(nowDate.getFullYear(),nowDate.getMonth()-1);
+			show(nowDate,inputDate,nowCheck);
+		});
+		
+		$("#after").click(function (){
+			$("td").parent('tr').remove();
+			nowDate=new Date(nowDate.getFullYear(),nowDate.getMonth()+1);
+			show(nowDate,inputDate,nowCheck);
+		});
+	});
+	
+	function Holiday(date){
+		var list={
+			1:[1],
+			2:[],
+			3:[1],
+			4:[],
+			5:[5],
+			6:[6],
+			7:[],
+			8:[15],
+			9:[],
+			10:[3,9],
+			11:[],
+			12:[25]
+		}
+		var monthList=list[date.getMonth()+1];
+		
+		this.isHoliday=function(day){
+			for(var i in monthList){
+				if(monthList[i]==day){
+					return true;
+				}
+			}
+			return false;
+		}
+	}
+	
+	function inputCheck(){
+		if(frmCal.input_date.value===''){
+			alert("정확한 날짜를 입력하세요");
+			return false;		
+		}else{
+			return true;
+		}
+	}
+	
+	function show(/*Date 인스턴스*/input, /*달력 최초 출력 시 Date인스턴스*/checkDate,  /*최초입력버튼 체크값*/checkBoolean ){
+		$('#frmCal').css('display','none');//form 화면에서 제거
+		$('table').css('display','block');//table 화면에 표시		
+
+		var year=input.getFullYear();//년
+		var month=input.getMonth()+1;//월
+		var day=input.getDate();//일
+		var day_of_week=(new Date(year,month-1,1)).getDay();//월의 시작요일
+		var last_day=(new Date(year,month,0)).getDate();//월의 마지막 날짜
+
+		
+		$('span').html(year+'년 '+month+'월');
+
+		//시작 날짜의 요일만큼 공백을 찍어준다.
+		var tr=document.createElement('tr');
+		$('table').append(tr);
+		for(var k=1;k<=day_of_week;k++){
+			var td=document.createElement('td');
+			tr.append(td);
+		}
+		
+		var check=dateCheck(input,checkDate);
+		var holiday=new Holiday(input);
+		for(var i=1,j=day_of_week; i<=last_day ; i++,j++){
+			if(j===7){//요일 인덱스 초기화
+				tr=document.createElement('tr');
+				$('table').append(tr);
+				j=0;
+			}
+
+			var td=document.createElement('td');
+			$(td).text(i);	
+			
+			if(j==0 || j==6 || holiday.isHoliday(i)){
+				$(td).css('color','red');
+			}
+			
+			if(check && i==checkDate.getDate()){
+				$(td).css('color','blue');
+				if(checkBoolean){
+					var div=document.createElement('div');
+					$(td).append(div);
+					$(div).css('color','purple');
+					var time=checkDate.toLocaleTimeString('ko-KR');
+					$(div).text(time.substring(0,time.lastIndexOf(':')));
+				}
+			}
+			tr.append(td);
+		}
+
+	}
+	
+	function dateCheck(inputDate,checkDate){
+		if(inputDate.getFullYear()==checkDate.getFullYear()){
+			return inputDate.getMonth()==checkDate.getMonth();
+		}else{
+			return false
+		}
+	}
+</script>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<form id="frmCal">
+		<input type="date"  id="input_date">
+		<input type="button"	value="달력 출력" id="show">
+		<input type="button" value="현재 시간 입력"	id="show_now">
+	</form>
+	<table id="tbCal">
+		<tr>
+			<th colspan="7">
+				<img id="before" src="../image/before_arrow.png" width="30px" height="30px">
+				<span></span>
+				<img id="after" src="../image/after_arrow.png" width="30px" height="30px">
+			</th>
+		</tr>
+		<tr>
+			<th>일</th><th>월</th><th>화</th><th>수</th><th>목</th><th>금</th><th>토</th>
+		</tr>
+	</table>
+</body>
+</html>

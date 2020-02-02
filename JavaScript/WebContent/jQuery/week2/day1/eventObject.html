@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+	$( document ).ready( function() {
+		var canvas = document.getElementById('canvas');
+		var context=canvas.getContext('2d');
+		
+		$(canvas).on({
+			mousedown: function(event){
+				var position = $(this).offset();
+				var x = event.pageX-position.left;
+				var y = event.pageY-position.top;
+				
+				context.beginPath();
+				context.moveTo(x,y);
+			},
+			mouseup: function(event){
+				var position = $(this).offset();
+				var x = event.pageX-position.left;
+				var y = event.pageY-position.top;
+				
+				context.lineTo(x,y);
+				context.stroke();
+			}
+		});
+	});
+</script>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<canvas id="canvas"	width="700" height="400" style="border: 3px solid black"></canvas>
+</body>
+</html>

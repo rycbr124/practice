@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+	.img-container{
+		float:left;
+		width:150px; height:auto;
+		padding:5px;
+	}	
+
+	p{
+		clear:left;
+	}
+	
+</style>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h2>Images Side bySide</h2>
+	<p>Float images side by side:</p>
+	<div class="clearfix">
+		<div class="img-container">
+			<img src="../image/img_5terre.jpg" alt="Italy" style="width: 100%">
+		</div>
+		<div class="img-container">
+			<img src="../image/img_forest.jpg" alt="Forest" style="width: 100%">
+		</div>
+		<div class="img-container">
+			<img src="../image/img_mountains.jpg" alt="Mountains" style="width: 100%">
+		</div>
+	</div>
+	<p>Note that we also use the clear fix hack to take care of the
+		layout flow, and that we add the box-sizing property to make sure that
+		the image container doesn't break due to extra padding.Try to remove
+		this code to see the effect.</p>
+</body>
+</html>

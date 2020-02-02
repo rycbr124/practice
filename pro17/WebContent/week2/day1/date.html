@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+	function test(){
+		var d = new Date();
+		console.log(
+		d.getFullYear() +"\n"+//set
+		d.getMonth()+"\n"+//set
+		d.getDate()+"\n"+//set
+		d.getHours()+"\n"+//set
+		d.getMinutes()+"\n"+//set
+		d.getSeconds()+"\n"+//set
+		d.getMilliseconds()+"\n"+
+		d.getDay() //0~6
+				);
+		
+	}
+	function test2(){
+		var d = new Date("2015-03-25");
+		console.log(d);
+		var d = new Date("2015-03");
+		console.log(d);
+		var d = new Date("2015-03-25T12:00:00Z");
+		console.log(d);
+		var d = new Date("25");		
+		console.log(d);	//Invalid Date
+	}
+	function test3(){
+		//날짜간격 구하기
+		var now=new Date();
+		var before=new Date('December 9,1991');
+		
+		//날짜 간격을 구합니다.
+		var interval = now.getTime() - before.getTime();
+		interval = Math.floor(interval / (1000*60*60*24));
+		
+		//출력합니다.
+		console.log('interval: '+ interval + '일');
+		
+		//내장객체의 프로토타입에 날짜 간격 구하는 메서드 추가
+		Date.prototype.getInterval = function  (otherDate){
+			//변수를 선언합니다.
+			var interval;
+			
+			//양수로 날짜 간격을 구하려고 조건문을 사용합니다.
+			if(this>otherDate){
+				interval = this.getTime()-otherDate.getTime();
+			}else{
+				interval = otherDate.getTime()-this.getTime();
+			}
+			
+			//리턴합니다.
+			return Math.floor(interval / (1000*60*60*24));
+		};
+		
+		//변수를 선언합니다.
+		//var now = new Date();
+		//var before = new Date('December 9, 1991');
+		
+		console.log('interval: '+now.getInterval(before)+'일');
+	}
+</script>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<input type="button" value="get//set" onClick="test()" />
+	<input type="button" value="date생성자" onClick="test2()" />
+	<input type="button" value="date계산" onClick="test3()" />
+</body>
+</html>

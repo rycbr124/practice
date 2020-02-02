@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+body{
+background-color:#FFFFFF;
+color:#333333;
+font-family:"굴림","Verdana";
+font-size:10pt;
+line-height:150%;
+}
+
+
+li ul{
+   display:none;
+}
+/*
+*/
+.click~*{
+   display:block;
+}
+
+
+A:link{font-size:10pt;font-family:굴림;color:#565656;text-decoration:none;}
+A:visited{font-size:10pt;font-family:굴림;color:#565656;text-decoration:none;}
+A:active{font-size:10pt;font-family:굴림;color:#FF6000;text-decoration:none;}
+A:hover{font-size:10pt;font-family:굴림;color:#FF6000;text-decoration:none;}
+span:hover{font-size:10pt;font-family:굴림;color:gray;text-decoration:none;}
+</style>
+<title>Insert title here</title>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+var data = {
+        name:'name',
+        href:'',
+        target:'target',
+        icon:'',
+        child:[]
+  };
+  var childA = {
+        name:'관리자메뉴',
+        href:'',
+        target:'targer',
+        icon:'../image/menu02.gif',
+        child:[]
+  };
+  var childB = {
+        name:'직원메뉴',
+        href:'',
+        target:'targer',
+        icon:'../image/menu02.gif',
+        child:[]
+  };
+  var childC = {
+        name:'관리자메뉴',
+        href:'',
+        target:'targer',
+        icon:'../image/menu02.gif',
+        child:[]
+  };
+
+  var childA1 = {name:'부하직원조회',href:'https://www.naver.com',target:'_blank',icon:'../image/menu01.gif',child:[]};
+  var childA2 = {name:'결제승인',href:'https://www.naver.com',target:'_blank',icon:'../image/menu01.gif',child:[]};
+  var childA3 = {name:'결제내역조회',href:'https://www.naver.com',target:'_blank',icon:'../image/menu01.gif',child:[]};
+     
+  var childB1 = {name:'결제신청',href:'https://www.naver.com',target:'_blank',icon:'../image/menu01.gif',child:[]};
+  var childB2 = {name:'급여정보조회',href:'https://www.naver.com',target:'_blank',icon:'../image/menu01.gif',child:[]};
+  var childB3 = {name:'인사정보조회',href:'https://www.naver.com',target:'_blank',icon:'../image/menu01.gif',child:[]};
+  
+  var childC1 = {name:'기준관리',href:'https://www.naver.com',target:'_blank',icon:'../image/menu01.gif',child:[]};
+  var childC2 = {name:'근무현황조회',href:'https://www.naver.com',target:'_blank',icon:'../image/menu01.gif',child:[]};
+  var childC3 = {name:'평가현황조회',href:'https://www.naver.com',target:'_blank',icon:'../image/menu01.gif',child:[]};
+ 
+//onload를 불러오는 함수
+  function init(){
+        var tree = new CreateTree(document.getElementById('div'));
+        //data에 property집어 넣기
+        data.child.push(childA);
+        data.child.push(childB);
+        data.child.push(childC);
+      
+        
+        childA.child.push(childA1);
+        childA.child.push(childA2);
+        childA.child.push(childA3);
+      
+        
+        childB.child.push(childB1);
+        childB.child.push(childB2);
+        childB.child.push(childB3);
+      
+        
+        childC.child.push(childC1);
+        childC.child.push(childC2);
+        childC.child.push(childC3);
+      
+        tree.data_init(data);
+        
+        tree.createView();
+  //body에 값을 할당해주는 함수
+ function parsing(data){
+   var child=data['child'];
+
+   var ul=document.createElement('ul');
+    for(var i in child){
+      var li=document.createElement('li');
+      li.setAttribute('style','list-style-image : url( "'+child[i].icon+'" )');
+      ul.appendChild(li);
+      if(child[i].child.length!=0){
+         var span=document.createElement('span');
+         span.innerHTML=child[i].name;
+         li.appendChild(span);                  
+         li.appendChild(parsing(child[i]));//재귀호출
+      }else{
+         var a=document.createElement('a');
+         a.innerHTML=child[i].name;
+         a.setAttribute('href',child[i].href);
+         li.appendChild(a);         
+      }
+    }
+    console.log(ul);
+   return ul;
+ }
+
+function CreateTree(input){//생성자 호출
+   this.data_init = function(data){
+     input.appendChild(parsing(data));
+   };
+   this.createView = function(){      
+      var body=document.getElementsByTagName('body')[0];//바디는 하나만 있기떄문에 [0]
+      body.appendChild(input);   
+   }
+}
+
+
+   
+
+      //click이벤트 생성
+      $('span').click(function(){
+          if($(this).is('.click')){//span에 클래스Click이 있으면 클래스 삭제
+             $(this).removeClass("click");
+             $(this).parent('li').css('list-style-image','url("../image/menu02.gif")');
+          }else{
+             $(this).addClass("click");//클래스가 없으면 생성
+             $(this).parent('li').css('list-style-image','url("../image/menu03.gif")');
+          } 
+      });
+   }
+
+</script>
+</head>
+<body onload="init()">
+<div id="div"></div>
+</body>
+</html>

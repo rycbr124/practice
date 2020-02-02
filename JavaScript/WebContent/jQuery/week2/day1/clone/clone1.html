@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+	$( document ).ready( function() {
+		$("#test1").click(function(){
+			  $( 'span' ).clone().appendTo( 'h1' );
+		});
+		
+		$("#test2").click(function(){
+			   $("body").append($("p:first").clone(true));
+		});
+		$("p").click(function(){
+			$(this).animate({fontSize: "+=1px"});
+		});
+	});
+</script>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1></h1>
+	<p><span>Lorem ipsum dolor.</span></p>
+<input type="button"	value="append" id="test1">
+
+ <p>Click this paragraph to increase text size.</p>
+ <button id="test2">click here</button>
+ 
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+	function thanks(){
+		document.f1.b1.onclick = function() { alert ('Thanks!'); };
+	}
+	
+	
+	function test(){
+		
+		var b = document.myform.mybutton;
+		var oldHandler = b.onclick;
+		function newHandler(){
+			/*
+			*/
+			console.log("check");
+		}
+	
+		b.onclick = function() { oldHandler();newHandler(); }
+	}
+		
+	
+</script>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<input type="button" value="alert thanks"	onclick="alert('thanks');"	>
+<input type="button" value="click here" onclick="if(window.numclicks) numclicks++; else numclicks=1; this.value='Click #'+numclicks; ">
+																	<!-- 전역변수가 있으면 --><!-- 여기에서는 if else 사이에 ; 넣어줘야함 -->
+<br><br><br><input type="button" value="add thanks" onclick="thanks()">
+<form name='f1'>
+<input name='b1' type='button' value='press me'>
+</form>
+<br><br>
+<form action='action.do' onsubmit='if(this.elements[0].value.length == 0) return false;'>
+ <input type="text">
+ <input type="submit"	value="제출">
+</form>
+<br><br>
+<form name="myform">
+	<input name="mybutton" type='button' value='press check' onclick="alert('hmm')">
+	<input type='button' value='press me'	onclick="test()">
+</form>
+</body>
+</html>

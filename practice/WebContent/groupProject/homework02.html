@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+	window.onload = function() {
+		var body = document.getElementsByTagName('body')[0];
+		function make(/*string*/tagname, /*object*/attributes, /*string,element,element Array*/
+				children) {
+			var newtagname = document.createElement(tagname); //tagname생성
+			//attributes object인지 확인
+			for ( var i in attributes) {
+				if (i in newtagname) {
+					newtagname[i] = attributes[i];
+				}
+			}
+			//children string, object 구분 후 TextNode 생성 후 tag에 append
+			if (typeof children === 'string') {
+				var newchildren = document.createTextNode(children);
+				newtagname.appendChild(newchildren);
+			} else if (typeof children === 'object') {
+				//cloneNode를 해야 중복안되고 복제 후 child로 붙음
+				//children 이 객체인지 확인
+				if (children instanceof Array) {
+					for (var i = 0; i < children.length; i++) {
+						newtagname.appendChild(children[i].cloneNode(true));
+					}
+				} else {
+					newtagname.appendChild(children.cloneNode(true));
+				}
+			}
+			return newtagname;
+		}
+		;
+
+		var div = make("div", {
+			'style' : 'background-color:red;',
+			'id' : 'div1'
+		}, "hello world");
+		body.appendChild(div);
+
+		var tds = [ make("td", {
+			'style' : 'color:pink;'
+		}, "Name"), make("td", {
+			'style' : 'color:blue'
+		}, "Type"), make("td", {}, "Value") ];
+		var tr = make("tr", {}, tds);
+
+		var table = make("table", {
+			'style' : 'border: 5px solid green;'
+		}, tr);
+		body.appendChild(table);
+		
+
+		var td1 = [make("td", {'style':'color:pink'},"Hello"),
+			make("td",{'style':'color:#ccc'},"world"),
+			make("tr",{},"Bye world"),
+			
+			];
+		var tr1 = make("tr",{},td1);
+		var table2 = make("table",{'style':'border: 3px dotted orange'},tr1);
+		body.appendChild(table2);
+		
+		var li = [make("li",{'style':'color:orange'},"안민형"),
+			make("li",{'style':'color:orange'},"이재홍"),
+			make("li",{'style':'color:orange'},"이주희"),
+			make("li",{'style':'color:orange'},"안은영"),
+			make("li",{'style':'color:orange'},"원종평")];
+		var ul = make("ul",{},li);
+		var table3 = make("div",{'style':'background-color:pink; border: 4px solid green'},ul);
+		body.appendChild(table3);
+	};
+</script>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+</body>
+</html>

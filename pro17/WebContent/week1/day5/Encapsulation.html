@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+	//클로저 사용,rectangle.with로 직접 접근할 수 없음.
+	function Rectangle(w,h){
+		//변수를 선언합니다.
+		var width=w;
+		var height=h;
+		
+		//메서드를 선언합니다.
+		this.getWidth=function(){return width;};
+		this.getHeight=function(){return height;};
+		this.setWidth=function(w){
+			if(w<0)
+				throw '길이는 음수일 수 없습니다.';
+			else
+				width=w;
+		};
+		this.setHeight=function(h){
+			if(h<0)
+				throw '높이는 음수일 수 없습니다.';
+			else
+				height=h;
+		};
+	}
+	
+	Rectangle.prototype.getArea=function(){
+		return this.getWidth()*this.getHeight();
+	};
+	
+	function test(){
+		/*
+		var a = prompt("길이를 입력해주세요", "길이를 입력해 주세요");
+		var b = prompt("높이를 입력해주세요", "높이를 입력해 주세요");		
+		var a=Number(a);
+		var b=Number(b)
+		if(isNaN(a) || isNaN(a) || a=='' || b=='' ){
+			alert('숫자만 입력하세요.');
+		}else{
+		*/
+			//변수를 선언합니다.
+			var rectangle = new Rectangle(7,11);
+			rectangle.setWidth(-2);
+			
+			//출력합니다,
+			alert('Area: '+ rectangle.getArea());
+		//}
+	}
+</script>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<input type="button"	value="캡슐화"	onClick="test()"	/>
+</body>
+</html>

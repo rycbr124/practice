@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+	$( document ).ready( function() {
+		$("button").click(function(){
+			$("body").append($("p:first").clone(true));
+		});
+		
+		$("p").click(function(){
+			$(this).animate({fontSize: "+=1px"});//this:<p>//내용</p>
+		});
+	});
+</script>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+ <p>Click this paragraph to increase text size.</p>
+ <button>click here</button>
+</body>
+</html>

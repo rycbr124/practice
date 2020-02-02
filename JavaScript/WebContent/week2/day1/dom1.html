@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+	function get_by_id(){
+		console.log(typeof document.getElementById("purchases"));//object		
+		console.log(document.getElementById("purchases"));//object		
+	}
+	
+	function get_by_tag(){
+		var items = document.getElementsByTagName("li");	//<li>태그에 대한 목록리스트
+		for(var i =0; i<items.length;i++){
+			console.log(typeof items[i]);
+			console.log(items[i]);
+		}
+		
+		//문서내에 모든 요소노드의 개수를 알고싶으면
+		console.log(document.getElementsByTagName("*").length);
+		console.log(document.getElementsByTagName("*"));
+		
+		//특정 요소노드 하위로 얼마나 많은 요소노드가 있는지 확인
+		var shopping = document.getElementById("purchases");
+		var items = shopping.getElementsByTagName("*");
+	}
+	
+	
+</script>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>쇼핑목록</h1>
+	<p title="a gentle reminder">물건을 선택해 주세요</p>
+	<ul id="purchases"	>
+		<li>땅콩</li>
+		<li>치즈</li>
+		<li>우유</li>
+		<li>과자</li>
+		<li>야채</li>
+	</ul>
+	<ul id="where"	>
+		<li>편의점</li>
+		<li>마트</li>
+		<li>시장</li>
+	</ul>
+	<input type="button" value="getElementById" onClick="get_by_id()" />
+	<input type="button" value="getElementsByTagName" onClick="get_by_tag()" />
+</body>
+</html>

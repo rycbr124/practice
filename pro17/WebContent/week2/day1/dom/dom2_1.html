@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+	function myFunction(){
+		var textnode = document.createTextNode("Water");
+		var item=document.getElementById("myList").childNodes[0];
+		console.log(textnode);
+		item.replaceChild(textnode,item.childNodes[0]);
+	}
+</script>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body onload="myFunction()">
+	<ul id="myList">
+		<li>Coffee</li>
+		<li>Tea</li>
+		<li>Milk</li>
+	</ul>
+	<button onclick="myFunction()">Try it</button>
+</body>
+</html>

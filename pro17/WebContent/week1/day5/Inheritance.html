@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+	function test1(){
+			
+		//모든 함수에는 apply(),call() 메서드가 존재한다.
+		//함수 f()에서 두 숫자를 전달하고 이 함수가 객체 o의 메서드 인 것처럼 호출할 경우
+		//첫번째 인자: 함수가 소속되어 호출될 객체
+		//나머지인자:함수의 전달인자
+		f.call(o,1,2);
+		
+		//다음코드와 동일
+		o.m=f;
+		o.m(1,2);
+		delete o.m;
+		
+		//apply()는 call()과 유사하지만 전달 인자를 배열로 지정하는 것이 다름
+		f.apply(o,[1,2]);
+	}
+
+	function test2(){
+		function MyParent(){
+			this.property1="부모속성";
+			console.log('Parent');
+		}
+		MyParent.prototype.info=function(){
+			console.log('property1:]'+this.property1);
+		};
+		function MyChild(){
+			this.property2="자식속성";
+			console.log('Child')
+		}
+		//부모클래스 상속
+		MyChild.prototype=new MyParent();
+		//생성자 생성
+		MyChild.prototype.constructor = MyChild;
+		MyChild.prototype.info=function(){
+			MyParent.prototype.info.call(this);//부모클래스의  info함수 호출
+			console.log('info 기능확장');
+		}
+		//자식 인스턴스 생성
+		var child=new MyChild();
+		child.info();
+	}
+</script>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<input type="button"	value="상속"	onClick="test2()"	/>
+</body>
+</html>

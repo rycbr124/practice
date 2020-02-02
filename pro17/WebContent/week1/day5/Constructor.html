@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+	function test1(){
+		//생성자 함수: Property를 초기화하며 new와 함께 사용된다.
+		function Rectangle(w,h){
+			this.width=w;
+			this.height=h;
+		}
+		var rect1=new Rectangle(2,4);
+		console.log(rect1);
+	}
+	
+	function test2(){
+		//생성자 함수에 메서드 속성 추가
+		function Rectangle(w,h){
+			this.width=w;
+			this.height=h;
+			this.area=function(){return this.width*this.height;}
+		}
+		var r=new Rectangle(8,11);
+		var a=r.area();
+		console.log(r);
+		console.log(a);
+	}
+	
+	function test3(){
+		//생성자 함수를 더 효율적으로 개선:prototype 사용
+		function Rectangle(w,h){
+			this.width=w;
+			this.height=h;
+		}
+		//각 인스턴스들이 공유해야 하는 Property나 메서드를 정의
+		Rectangle.prototype.area=function(){
+			return this.width*this.height;
+		}
+		var k=new Rectangle(8,11);
+		console.log(k.area());
+	}
+	
+	function CircleClass(){
+		//생성자 함수 정의
+		function Circle(radius){
+			//r은 프로퍼티이고 생성자 함수에서 초기화
+			this.r=radius;
+		}
+		//클래스 프로퍼티, 생성자 함수의 프로퍼티
+		//인스턴스를 통해 접근x, 자바의 클래스 변수처럼 작동
+		Circle.PI=3.14159;
+		//인스턴스 메서드
+		Circle.prototype.area=function(){return Circle.PI*this.r*this.r;}
+		//클래스 메서드
+		Circle.max=function (a,b){
+			if(a.r>b.r) return a;
+			else return b;
+		}
+		var c=new Circle(1.0)			//인스턴스 생성
+		c.r=2.2;								//인스턴스 프로퍼티
+		var a =c.area();					//인스턴스 메서드
+		var x = Math.exp(Circle.PI);	//클래스 프로퍼티
+		var d = new Circle(1.2);		//다른 인스턴스
+		var bigger = Circle.max(c,d);	//클래스 메서드 
+		console.log(c);	
+		console.log(c.r);
+		console.log(a);
+		console.log(x);
+		console.log(bigger);
+	}
+</script>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<input type="button"  value="생성자 함수" onClick="test1()"	/>
+	<input type="button"  value="메서드 속성 추가" onClick="test2()"	/>
+	<input type="button"  value="클래스 만들기" onClick="CircleClass()"	/>
+</body>
+</html>

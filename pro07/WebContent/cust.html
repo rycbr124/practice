@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script type="text/javascript">
+	function fn_validate(){	
+		var frmCust2 = document.frmCust2;//<form> 태그의 name 속성으로 <form> 태그 객체를 받아 옵니다.
+		//<form> 태그 내 <input> 태그의 name 속성으로 입력한 값을 받아 옵니다.
+		var user_id = frmCust2.user_id.value;
+		
+		if (user_id.length==0||user_id=="") {
+			alert("고객번호를 입력해주세요.")
+		}else{
+			frmCust2.method="post";//<form> 태그의 전송 방식을 post로 설정합니다.
+			frmCust2.action="cust";//action 속성을 서블릿 매핑 이름인 cust로 설정합니다.
+			frmCust2.submit();//자바스크립트에서 서블릿으로 전송합니다.
+		}
+	}
+</script>
+
+
+<title>주문정보검색</title>
+</head>
+<body>
+	<form name="frmCust2" method="post" action="cust" encType="UTF-8">
+	고객번호 :<input type="number" name="user_id"> <br> 
+	<input type="button" onClick="fn_validate()" value="조회"> 
+	<input type="reset" value="다시입력">
+	<input type="hidden" name="command" value="showCust"	/><!-- <hidden>태그를 이용해 서블릿에게 회원 조회임을 알립니다. -->
+	<input type="hidden" name ="preCust">
+	</form>
+</body>
+</html>

@@ -1,0 +1,65 @@
+ <!DOCTYPE html>
+<html>
+<head>
+<script>
+	function test1(){
+		//메서드로서의 함수
+		var calculator={
+			operand1: 1,
+			operand2: 1,
+			//함수는 this를 property를 통해 자신이 속한 객체에 접근할 수 있다.
+			compute:function(){
+				this.result=this.operand1+this.operand2;	
+			}
+		};
+		calculator.compute();
+		console.log(calculator.result);//결과를 출력
+	}
+
+	function test2(){
+		//함수 property:length 정의된 함수 매개변수 갯수
+		function check(args){
+			var actual = args.length;//실제로 전달받은 매개변수 갯수
+			var expected = args.callee.length; //함수가 기대하는 매개변수 개수
+			if(actual != expected){
+				throw new Error('Wrong number of arguments');
+			}
+		}
+		
+		function f(x,y,z){
+			//함수가 기대하는 전달인자를 받았는지 검사
+			check(arguments);
+				return x+y+z;
+		}
+		
+	}
+	
+	function test3(){
+		//함수의 정적 property를 생성하고 초기화
+		uniqueInteger.counter=0;
+		//호출할 때마다 다른 값을 리턴
+		function uniqueInteger(){
+			return uniqueInteger.counter++;
+		}
+		for(i=0;i<5;i++){
+			alert(uniqueInteger());
+		}
+	}
+	
+	function test4(){
+		function arraycopy(from,from_start,to,to_start,length)
+		function easycopy(args){
+			arraycopy(args.from, args.from_start||0, args.to, args.to_start||0, args.length);
+		}
+	}
+</script>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<input type="button"  value="메서드로서의 함수" onClick="test1()"	/>
+	<input type="button"  value="매개변수의 개수" onClick="test2()"	/>	
+	<input type="button"  value="함수 property 추가하기" onClick="test3()"	/>	
+	<input type="button"  value="객체 property를 전달인자로" onClick="test4()"	/>	
+</body>
+</html>

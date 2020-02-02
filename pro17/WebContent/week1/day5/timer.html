@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+	function test1(){
+	//3초 후에 함수를 실행합니다.
+		setTimeout(function (){
+			alert('3초가 지났습니다. \'ㅅ\'')
+		},3000);
+	}
+	function test2(){
+	//1초마다 함수를 실행합니다.
+		var intervalID = setInterval(function (){
+			alert('<p>'+new Date()+'</p>')
+		},1000);
+	}
+	/*
+	function test3(){
+	//10초 후 함수를 실행합니다.
+		setTimeout(funciton (){
+		//타이머를 종료합니다.
+			clearInterval(intervalID);
+		},10000);
+	}
+	*/
+</script>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<input type="button" value="timeout" onClick="test1()"	/>
+	<input type="button" value="interval" onClick="test2()"	/>
+	<input type="button" value="interval" onClick="test3()"	/>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+	function sortReverse(){
+		var arrayA=['b','c','a'];
+		arrayA.sort();//정렬하기
+		console.log(arrayA);
+		arrayA.reverse();//역순으로 정렬하기
+		console.log(arrayA);		
+	}
+	function setSort(){
+		var arrayB = [40,100,1,5,25,10];
+		arrayB.sort(function(a,b){return a-b}); //정렬기준 함수를 매개변수로 전달
+		console.log(arrayB);
+	}
+	function forEach(){
+		var txt=""; //전역변수
+		var numbers = [45,4,9,16,25];
+		numbers.forEach(myFunction); //각 요소별 함수 호출
+		document.getElementById("demo").innerHTML = txt;
+		function myFunction(value,index,array){ //value(요소),array(전체배열)
+			txt=txt+value+"<br>";
+		}
+	}
+	function find(){
+		
+	}
+</script>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<input type="button"  value="정렬" onClick="sortReverse()"	/>
+	<input type="button"  value="정렬기준설정" onClick="setSort()"	/>
+	<input type="button"  value="forEach" onClick="forEach()"	/>
+	<input type="button"  value="indexOf" onClick="indexOf()"	/>
+	<div id="demo">
+	</div>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+function join(choice){
+		if(choice==1){  
+			//숫자를 스트링으로 바꾸기
+			var tt=2;
+			tt+="";
+			//result : string
+		}else if(choice==2){
+			//숫자를 스트링으로 바꾸기
+			var tt=2;
+			tt+=tt.toString();
+			//result : string
+		}else if(choice==3){
+			//숫자를 스트링으로 바꾸기
+			var tt=123456.789
+			tt=tt.toFixed(0);
+			//result : string
+		}else if(choice==4){
+			//숫자를 스트링으로 바꾸기
+			var tt=123456.789
+			tt=tt.toFixed(2);
+			//result : string
+		}else if(choice==5){
+			//boolean과 숫자연산
+			var tt=true
+			tt=tt+1;//2
+			//result : number
+		}else if(choice==6){
+			//boolean과 문자연산
+			var tt=true
+			tt=tt+"1"; //true1
+			//result : string
+		}else if(choice==7){
+			//스트링을 숫자로 바꾸기
+			var tt="2";
+			tt*=1;
+			//result : number
+		}else if(choice==8){
+			//숫자를 스트링으로 바꾸기
+			var tt=2;
+			alert(typeof tt);//number
+			tt = String(tt);
+			//result : string
+		}else if(choice==9){
+			//스트링을 숫자로 바꾸기
+			var tt="3.14 AA"
+			alert(typeof tt);
+			tt=Number(tt);//숫자만 변환가능
+		}else if(choice==10){
+			//스트링을 숫자로 바꾸기
+			var tt="3.14 AA"
+			alert(typeof tt);
+			tt=parseInt(tt);//정수만 변환가능
+		}else if(choice==11){
+			//스트링을 숫자로 바꾸기
+			var tt="3.14 AA"
+			alert(typeof tt);
+			tt=parseFloat(tt);//실수도 변환가능
+		}
+		alert(tt+"  typeof: "+typeof tt);
+		
+	}
+
+</script>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<input type="button"  value="number to string" onClick="join(1)"	/>
+	<input type="button"  value="toString()" onClick="join(2)"	/>
+	<input type="button"  value="toFixed(0)" onClick="join(3)"	/>
+	<input type="button"  value="toFixed(2)" onClick="join(4)"	/>
+	<input type="button"  value="boolean과 숫자연산" onClick="join(5)"	/>
+	<input type="button"  value="boolean과 문자연산" onClick="join(6)"	/>
+	<input type="button"  value="스트링을 숫자로 바꾸기" onClick="join(7)"	/>
+	<input type="button"  value="숫자를 스트링으로 바꾸기" onClick="join(8)"	/>
+	<input type="button"  value="Number(tt)" onClick="join(9)"	/>
+	<input type="button"  value="parseInt(tt)" onClick="join(10)"	/>
+	<input type="button"  value="parseFloat(tt)" onClick="join(11)"	/>		
+</body>
+</html>

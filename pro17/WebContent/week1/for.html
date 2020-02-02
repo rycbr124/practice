@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+	function label(){
+		outerloop: //label name
+		for(var i=0; i<10; i++){
+			innerloop:
+			for(var j=0; j<10; j++){
+				if(j>3) break;
+				if(i==2) break innerloop;
+				if(i==4) break outerloop;
+				console.log("i="+i+"//  j="+j)
+			}
+		}
+		console.log("FINAL i="+i+"//  j="+j)
+	}
+	
+	function forEach(){
+		var array=['포도','사과','바나나','망고'];
+		//배열의 내장함수
+		array.forEach(function(item){
+			console.log(item);
+		});
+	}
+	
+	function forOf(){
+		var array=['포도','사과','바나나','망고'];
+		//Symbol.iteratior 속성을 가지는 컬렉션전용
+		for(var i of array){
+			console.log(array[i]);
+		}
+	}
+	
+	function property(){
+		var mySymbol1=Symbol('mySymbol');
+		var mySymbol2=Symbol('mySymbol');
+		mySymbol1===mySymbol2;//false
+		var prop2 = Symbol('prop2');
+		var obj={
+				prop1:1,
+				[prop2]:2,
+		};
+		for(var key in obj){
+			console.log(key); //prop1만 출려굄
+		}
+		console.log(obj[prop2]);//2,대괄호[]로만 접근가능
+	}
+
+</script>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<input type="button"  value="Label" onClick="label()"	/>
+	<input type="button"  value="forEach" onClick="forEach()"	/>
+	<input type="button"  value="forOf" onClick="forOf()"	/>
+	<input type="button"  value="property" onClick="property()"	/>
+</body>
+</html>

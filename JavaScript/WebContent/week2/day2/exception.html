@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+	function test1(){
+		try{
+			try{
+				throw new Error("oops");//객체가 들어온다
+				//throw 'Error입니다.'//string으로 들어온다
+			}finally{
+				console.log("finally");
+			}
+		}catch(ex){ //finally 선 실행 후 catch는 밖에서
+			console.log("outer",ex.message);
+		}
+	}
+	
+	function test2(){
+		try{
+			var array=new Array(999999999999);
+		}catch(exception){
+			console.log('11:'+exception.message);
+			console.log('22:'+exception.description);
+			console.log('33:'+exception.name);
+		}
+	}
+	
+	function test3(){
+		try{
+			try{
+				throw new Error("oops");
+			}catch(ex){
+				console.error("inner",ex.message);//밖에있는 catch가 받는다
+			}finally{
+				console.log("finally");
+			}
+		}catch(ex){
+			console.error("outer",ex.message);
+		}
+	}
+	
+	function test4(){
+		try{
+			try{
+				throw new Error("oops");
+			}catch(ex){
+				console.error("inner",ex.message);//밖에있는 catch가 받는다
+				throw ex;
+			}finally{
+				console.log("finally");
+			}
+		}catch(ex){
+			console.error("outer",ex.message);
+		}
+	}
+</script>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<input type="button" value="1번" onClick="test1()" />
+	<input type="button" value="2번" onClick="test2()" />
+	<input type="button" value="3번" onClick="test3()" />
+	<input type="button" value="4번" onClick="test4()" />
+</body>
+</html>

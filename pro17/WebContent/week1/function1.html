@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+	//함수를 전역변수에 할당
+	function square(x) {return x*x}
+	var a= square(4);
+	var b= square; //b는 함수를 가리킨다
+	var c =b(5);
+	alert("a: "+a+"\nb: "+b+"\nc: "+c);
+	
+	function test2(){
+	//함수를 객체 property에 할당
+		var o=new Object();
+		o.square=function(x) {return x*x;}
+		var y=o.square(16);
+		console.log(y);
+	}
+	
+	function test3(){
+	//배열원소에 함수 할당
+		var a=new Array(3);
+		a[0]=function(x){return x*x};
+		a[1]=20;
+		a[2]=a[0](a[1]);
+		console.log(a)
+	}
+	
+	function test4(){
+	//객체의 Property를 배열로 전달
+		function copyPropertyNamesToArray(o,a){
+			if(!a)a=[]; //a=a||[];
+			for(var property in o) a.push(property);
+			return a;
+		}
+	}
+	
+	function test5(){
+	//함수를 데이터로 사용하기
+		function add(x,y) {return x+x;}
+	}
+	
+</script>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<input type="button" value="1번" onClick="test1()" />
+	<input type="button" value="2번" onClick="test2()" />
+	<input type="button" value="3번" onClick="test3()" />
+	<input type="button" value="4번" onClick="test4()" />
+</body>
+</html>

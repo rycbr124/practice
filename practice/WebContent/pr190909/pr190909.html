@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+	function Stack(){
+		var array=[];
+		this.isEmpty=function(){
+			if(array.length===0){
+				return true;
+			}else{
+				return false;
+			}
+		};
+		this.push=function(input){
+			array.push(input);
+		};
+		this.peek=function(){
+			return array[array.length-1];
+		};
+		this.size=function(){
+			return array.length;
+		};
+		this.pop=function(){
+			return array.pop();
+		}
+		this.print=function(){
+			console.log(array);
+		}
+	}
+	
+	function Queue(){
+		var array=[];
+		this.isEmpty=function(){
+			if(array.length===0){
+				return true;
+			}else{
+				return false;
+			}
+		};
+		this.enqueue=function(input){
+			array.push(input);
+		};
+		this.dequeue=function(){
+			array.shift();
+		};
+		this.size=function(){
+			return array.length;
+		};
+		this.print=function(){
+			console.log(array);
+		}
+	}
+	
+	function Set(){
+		var array=[];
+		this.has=function(input){
+			for(var i in array){
+				if(array[i]===input){
+					return true;
+				}
+			}
+			return false;
+		};
+		this.add=function(input){
+			if(!this.has(input)){
+				array.push(input);
+				return true;
+			}
+			return false;
+		};
+		this.values=function(){
+			return array;
+		};
+		this.size=function(){
+			return array.length;
+		};
+		this.remove=function(input){
+			for(var i in array){
+				if(array[i]===input){
+					array.splice(i,1);
+					return true;
+				}
+				return false;
+			}
+		}
+		this.clear=function(){
+			array=[];
+		}
+		this.union=function(input){
+			var result = new Set();
+			var resArr=array.concat(input.values());
+			for(var i in resArr){
+				result.add(resArr[i]);	
+			}
+			return result;
+		}
+	}
+	
+	function stackTest(){
+		var stack = new Stack();
+		console.log(stack.isEmpty()); //결과는 true
+		stack.push(5);
+		stack.push(8);
+		console.log(stack.peek()); //결과는 8;
+		stack.push(11);
+		console.log(stack.size()); //결과는 3;
+		console.log(stack.isEmpty()); //결과는 false
+		stack.push(15);
+		stack.pop();
+		stack.pop();
+		console.log(stack.size());//결과는 2
+		stack.print(); // 결과는 [5, 8]
+	}
+	
+	function queueTest(){
+		var queue = new Queue();
+		console.log(queue.isEmpty()); //결과는 true
+		queue.enqueue("John");
+		queue.enqueue("Jack");
+		queue.print(); // 결과는 John,Jack
+		queue.enqueue("Camila");
+		queue.print(); // 결과는 John,Jack,Camila
+		console.log(queue.size()); //결과는 3
+		console.log(queue.isEmpty()); //결과는 false
+		queue.dequeue();
+		queue.dequeue();
+		queue.print(); // 결과는 Camila
+	}
+	
+	function setTest(){
+		var set = new Set();
+		set.add(1);
+		console.log(set.values()); //결과는 ["1"]
+		console.log(set.has(1));   //결과는 true
+		console.log(set.size());   //결과는 1
+		set.add(2);
+		console.log(set.values()); //결과는 ["1", "2"]
+		set.remove(1);
+		console.log(set.values()); //결과는 ["2"]
+		set.clear();
+		console.log(set.values()); //결과는 []
+	}
+	
+	function unionTest(){
+		var setA = new Set();
+		setA.add(1);
+		setA.add(2);
+		setA.add(3);
+		var setB = new Set();
+		setB.add(3);
+		setB.add(4);
+		setB.add(5);
+		setB.add(6);
+		var unionAB = setA.union(setB); // set을 리턴
+		console.log(unionAB.values());	
+	}
+</script>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<input type="button" value="stackTest" onClick="stackTest()" />
+	<input type="button" value="queueTest" onClick="queueTest()" />
+	<input type="button" value="setTest" onClick="setTest()" />
+	<input type="button" value="unionTest" onClick="unionTest()" />
+</body>
+</html>

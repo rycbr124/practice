@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+	function test1(){	//a에 b를 merge하고 그 결과에 c를 merge	
+		var a={
+		   id: 1,
+		   name: 'TAM'		
+		};
+		
+		var b={
+		   name: 'TAM-new',
+		   hobby: 'football'
+		};
+		
+		var c={
+		   name: 'TAM-new-new',
+		   job: 'designer'
+		};
+		
+		$.extend(a,b,c);
+		
+		console.log(a);//{id: 1, name: "TAM-new-new", hobby: "football", job: "designer"}
+	}
+	
+	function test2(){
+		var a={
+		   id: 1,
+		   name: 'TAM'		
+		};
+		var b={
+		   name: 'TAM-new',
+		   hobby: 'football'
+		};
+		
+		var newobject=$.extend({},a,b);
+		
+		console.log(newobject);//{id: 1, name: "TAM-new", hobby: "football"}
+	}
+	
+	function test3(){
+		var a = {
+		   style: {
+		       top: 100,
+		       left: 200,
+		       width: 300
+		   },
+		   duration: 1000
+		};
+			 
+		var b = {
+		   style: {
+		       height: 400
+		   }
+		};		
+		
+		$.extend(true,a,b);
+		
+		console.log(a);//style: {top: 100, left: 200, width: 300, height: 400} , duration: 1000
+	}
+</script>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<input type="button" value="1번" onclick="test1()">
+	<input type="button" value="2번" onclick="test2()">
+	<input type="button" value="3번" onclick="test3()">
+</body>
+</html>

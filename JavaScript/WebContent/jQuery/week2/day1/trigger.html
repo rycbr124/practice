@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+	$(document).ready(function (){
+		$("span").on("eventTest",function(event){
+			console.log("the span element");
+		});
+		$("p").on("eventTest",function(event){
+			console.log("the p element");
+		});
+		$("div").on("eventTest",function(event){
+			console.log("the div element");
+		});
+		
+		$("button").click(function(){
+			$('span').trigger("eventTest");		
+		});
+	});
+</script>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div style="height: 100px; width: 500px; background-color: lightblue;">
+		This is a div element.
+		<p style="background-color: pink">
+			This is a p element <br> <span style="background-color: orange">This
+				is a span element</span>
+		</p>
+	</div>
+	<button>Click Here</button>
+</body>
+</html>

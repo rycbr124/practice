@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+	//클로저:중첩함수
+	function makefunc(x){
+		return function(){return x;}
+	}
+
+	var a = [makefunc('x'), makefunc('y'), makefunc('z')];
+	alert(a[0]()); //x
+	alert(a[1]()); //y
+	alert(a[2]()); //z
+</script>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+</body>
+</html>

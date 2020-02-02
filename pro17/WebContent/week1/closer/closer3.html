@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+	var uniqueID = (function(){
+		var id=0;
+		return function(){return id++;};
+	})();//첫번째 익명함수의 리턴값(두번째 익명함수)을 uniqueID에 담음
+	
+	function unique(){
+		alert(uniqueID());	
+	}
+</script>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<input type="button" value="closer" onClick="unique()" />
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+	function test(){
+		var str = "Please locate where 'locate' occurs!";
+		var pos = str.indexOf("locate");
+		console.log("indexOf : "+pos);
+		
+		//var str = "Please locate where 'locate' occurs!";
+		var pos = str.indexOf("locate",15); //시작 Index 존재
+		console.log("indexOf('locate',15) : "+pos); //'locate' 인덱스
+		
+		//var str = "Please locate where 'locate' occurs!";
+		var pos = str.lastIndexOf("locate");
+		console.log("lastIndexOf : "+pos); //'locate' 인덱스
+		
+		var str = "Apple, Banana, Kiwi";
+		var res = str.slice(7,13); //index 7 이후의 string
+		console.log("slice(7,13) : "+res );
+		
+		var res = str.slice(7); //index 7 이후의 string
+		console.log("slice(7) : "+res );
+		
+		var res = str.substring(7,13);
+		console.log("substring(7,13) : "+res );
+		
+		var text1 = "HelloWorld!"; //String
+		var text2 = text1.toUpperCase();
+		console.log("toUpperCase : "+text2);
+		
+		var text1 = "Hello";
+		var text2 = "World";
+		var text3 = text1.concat("",text2);
+		console.log("concat : "+ text3);
+		
+		var str = "			HelloWorld!			";
+		console.log("trim : "+str.trim());
+		
+		var str = "HELLOWORLD";
+		var res = str.charAt(0);
+		console.log("charAt(0) : "+res);
+		
+		console.log("str[0] : "+str[0]);//H,변경안됨
+
+		var txt = "a,b,c,d,e"; //String
+		console.log(txt.split(","));//arr로 리턴
+		
+		var txt = "Hello";
+		console.log(txt.split(""));//arr로 리턴
+		
+		var check = ["c","h","e","c","k"];
+		var check2 = check;	
+		//var check2 = check+"";
+		console.log(check2);
+		
+	}
+</script>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<input type="button" value="test" onClick="test()" />
+</body>
+</html>

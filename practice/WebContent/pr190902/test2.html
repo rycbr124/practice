@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<style>
+		.container{
+			position:relative;
+		}
+		.topleft{		
+			position:absolute;		
+			top:10px; left:10px;
+		}
+		img{
+			z-index:-1;
+			opacity:0.1;
+		}
+	</style>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h2>Image Text</h2>
+	<p>Add some text to an image in the top left corner:</p>
+	<div class="container">
+		<img src="../image/img_5terre_wide.jpg"alt="Cinque Terre" width="1000" height="300">
+		<div class="topleft">Top Left</div>
+	</div>
+	</body>
+</html>

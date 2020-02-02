@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+	function res(){
+		var p_dan=document.getElementById("dan").value;
+		p_dan=Number(p_dan);
+		if(isNaN(p_dan) || p_dan<=0){
+			alert("check");
+		}else{
+			document.getElementById("guForm").innerHTML="";
+			document.write("<style>");
+			document.write("		th,td{");			
+			document.write("			width:40px; height:30px; text-align:center;");			
+			document.write("		}");
+			document.write("</style>");			
+			document.write("<table border='1px'>");
+			for( var i=0; i<=p_dan ; i++){
+				document.write("<tr>");
+				for(var j=0; j<=p_dan ; j++){
+					if(i==0 && j==0){
+						document.write("<th style='background-color:yellow'>X</th>");
+					}else if(i==0){
+						document.write("<th style='background-color:pink'>"+j+"</th>");
+					}else if(j==0){
+						document.write("<th style='background-color:pink'>"+i+"</th>");
+					}else{
+						document.write("<td>"+i*j+"</td>");
+					}
+				}
+				document.write("</tr>");				
+			}
+			document.write("</table>")
+		}
+	}
+</script>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+   <form id="guForm" method="post" >
+    몇단을 만들까요?
+      <input type="text" id="dan"	/>
+      <input type ="button" value="구구단 만들기"	onClick="res()"/>	 		 
+   </form>
+</body>
+</html>

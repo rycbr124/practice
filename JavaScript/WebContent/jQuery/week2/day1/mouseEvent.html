@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<style>
+	.outer{
+		width:200px;
+		height:200px;
+		background:lightblue;
+		padding:50px;
+		margin:10px;
+	}
+	.inner{
+		width:80%;
+		height:80%;
+		background:blue;
+	}
+</style>
+<head>
+		<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<script>
+	$(document).ready(function (){
+		$('.outer').mouseover(function(){
+			$('body').append('<h1>MOUSEOVER</h1>');
+		}).mouseenter(function (){
+			$('body').append('<h1>MOUSEENTER</h1>');
+		})	
+	
+	});
+
+	</script>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div class="outer">
+		<div class="inner"></div>
+	</div>
+</body>
+</html>

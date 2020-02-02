@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>고객정보조회</title>
+</head>
+<body>
+	<form name="frmCust" method="post" action="customers" encType="UTF-8">
+	고객번호: <input type="text" name="p_cust_id">
+	<input type='hidden' name='command' value='showCust'   />
+	<input type="submit" name="조회">
+	<input type="button"  onClick="location.href='/pro08/chgCustomers.jsp?command=addCust'" value="고객추가">
+	</form>
+</body>
+</html>

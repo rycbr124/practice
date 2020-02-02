@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<style>
+		.display-none{display:none}
+		.invisible{visibility:hidden}
+		.inline1{
+			/* display:inline-block; */
+			width:200px; /*이 값은 무시됨*/
+			border:3px solid #999;
+		}
+	</style>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div class="display-none">1</div>
+	<div>2</div>
+	<div class="invisible">3</div>
+	<div>4</div>
+	<p><!-- span은 inline -->
+		Test TTTTTTTTTT<span class="inline1">TestEEEEEEEeeee</span>,
+		TeSSSSSSSSSSSSSSSSSSSSSSSSS
+	</p>
+</body>
+</html>

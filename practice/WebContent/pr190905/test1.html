@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+	function test1() {
+		var s = prompt("단어를 입력해주세요", "단어를 입력해 주세요");
+		alert(calculate1(s));
+		function calculate1(s) {
+			var leng=s.length
+			var result;
+			if(leng%2==1){
+				return s.substr((leng-1)/2,1);
+			}else if(leng%2==0){
+				return s.substr((leng/2)-1,2);
+			}
+		}
+	}
+	
+	function test2(){
+		var arr=[1,2,3,3,3,3,3,4,5,5,5,6,7,8,9];
+		alert(calculate2(arr));
+		function calculate2(arr){
+			var result=[arr[0]];
+			for(var i=1; i<arr.length; i++){
+				if(arr[i-1]!=arr[i]){
+					result.push(arr[i]);
+				}
+			}
+			return result;
+		}
+	}
+	
+	function test3(){
+		var a = prompt("숫자를 입력해주세요", "숫자를 입력해 주세요");
+		var b = prompt("숫자를 입력해주세요", "숫자를 입력해 주세요");		
+		var a=Number(a);
+		var b=Number(b)
+		if(isNaN(a) || isNaN(a) || a=='' || b=='' ){
+			alert('숫자만 입력하세요.');
+		}else{
+			alert(calculate3(a,b));
+		}
+		function calculate3(a, b) {
+			if(a>b){
+				var c=a;
+				a=b;
+				b=c;
+			}
+			var result=0;
+			for(var i=a+1;i<b;i++){
+				result+=i;
+			}
+			return result;
+		}
+	}
+	
+	function test4(){
+		var arr=[1,2,3,4,5,5,6,7,8,9];
+		alert(calculate4(arr));
+		function calculate4(arr) {
+			var result=0;
+			for(var i of arr){
+				result+=i;
+			}
+			return result/arr.length;
+		}
+	}
+	
+</script>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<input type="button" value="1번" onClick="test1()" />
+	<input type="button" value="2번" onClick="test2()" />
+	<input type="button" value="3번" onClick="test3()" />
+	<input type="button" value="4번" onClick="test4()" />
+</body>
+</html>

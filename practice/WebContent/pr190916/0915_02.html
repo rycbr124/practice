@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD Xhtml 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title> </title>
+    <style>
+        body{
+            font-size:9pt;
+        }
+        .panel {
+            width:840px;
+            height:415px;
+            border:1px solid #ccc;
+        }
+        .nav {
+            width:840px;
+            text-align:center;
+        }
+        button {
+        	margin-top:5px;
+        	padding:5px;
+        }
+    </style>
+    <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+    <script>
+    	var count=0;
+		$(document).ready(function (){
+			document.getElementById('play').addEventListener('click',btn_play);
+			document.getElementById('stop').addEventListener('click',btn_stop);
+			document.getElementById('prev').addEventListener('click',btn_prev);
+			document.getElementById('next').addEventListener('click',btn_next);
+		});
+		
+		function srcControl(command){
+
+			var prevSrc=$('img#view').attr('src');
+			var index=prevSrc.substring(prevSrc.lastIndexOf("/")+1,prevSrc.lastIndexOf("."));
+			if(command=="next"){
+				index=Number(index)+1;
+			}else if(command=="prev"){
+				index=Number(index)-1;
+			}
+			
+			if(index<1){
+				index=60;	
+			}else if(index>60){
+				index=1;
+			}
+
+			var chgSrc=prevSrc.substring(0,prevSrc.lastIndexOf("/")+1)+index+prevSrc.substring(prevSrc.lastIndexOf("."));
+			return chgSrc;
+		}
+		
+		function btn_play(){
+			if(count==0){			
+				count=setInterval(function (){
+					$('img#view').attr('src',srcControl("next"));
+				}, 100);
+			}
+		}
+		
+		function btn_stop(){
+			clearInterval(count);
+			count=0;
+		}
+		
+		function btn_prev(){
+			btn_stop();
+			$('img#view').attr('src',srcControl("prev"));
+		}
+		
+		function btn_next(){
+			btn_stop();
+			$('img#view').attr('src',srcControl("next"));
+		}
+    </script>
+</head>
+
+<body>  
+    <div class="panel">
+        <img src="./car_images/1.jpg" id="view">            
+    </div>
+    <div class="nav">
+        <button id="play" >play</button>
+        <button id="stop">stop</button>
+        <button id="prev">prev</button>
+        <button id="next">next</button>
+    </div>
+</body>
+
+</html>

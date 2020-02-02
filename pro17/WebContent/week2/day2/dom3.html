@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+	.demo2{
+		color:red;
+	}
+	.demo3{
+		color:blue;
+	}
+</style>
+<script>
+function add(){
+	
+	var para= document.createElement("p");
+	var txt1= document.createTextNode("이것은");
+	para.appendChild(txt1);
+	
+	var emphasis = document.createElement("em");
+	var txt2= document.createTextNode("테스트");
+	emphasis.appendChild(txt2);
+	para.appendChild(emphasis);
+	
+	var txt3 = document.createTextNode("입니다.");
+	para.appendChild(txt3);
+	
+	document.body.appendChild(para);
+	
+}
+	
+	
+	function test1(){
+		var sp1 = document.createElement("span");
+		sp1.appendChild(document.createTextNode("테스트"))
+		var sp2 = document.getElementById("childElement");
+		var parentDiv  = sp2.parentNode;
+		parentDiv.insertBefore(sp1, sp2);
+	}
+	
+	function test2(){
+		var myobj = document.getElementById("demo");
+		myobj.remove(); //노드제거
+	}
+	
+	function test3(){
+		document.getElementsByTagName("H1")[0].removeAttribute("class");//속성제거
+
+	}
+	
+	function test4(){
+		var list=document.getElementById("myList");
+		list.removeChild(list.childNodes[0]); //child제거
+	}
+</script>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div id="parentElement"	>
+		<span id="childElement"	>foo bar</span>
+	</div>
+<br><hr><br>
+	<p>The remove() method removes the element from the DOM. </p>
+	<p id="demo">dddddddddddddddddddddddddddddddddddd</p>
+<br><hr><br>
+	<h1 class="demo2"	>eeeeeeeeeeeeeeeeeeeeeeeeeee
+		<div class="demo3">
+		sdfdsfsdfsdfsdfsdfsdf
+		</div>
+	</h1>
+<br><hr><br>
+	<ul id="myList"><li>Coffee</li><li>Tea</li><li>Milk</li></ul>
+<br><hr><br>
+	<input type="button" value="add" onClick="add()" />	
+	<input type="button" value="1번" onClick="test1()" />
+	<input type="button" value="Remove paragraph" onClick="test2()" />	
+	<input type="button" value="Try it" onClick="test3()" />	
+	<input type="button" value="Try it" onClick="test4()" />
+</body>
+</html>

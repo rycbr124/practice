@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+function test1(){
+	 document.getElementById('a').addEventListener('click',function(){console.log('a')});
+	 document.getElementById('b').addEventListener('click',function(){console.log('b')});
+	 document.getElementById('c').addEventListener('click',function(){console.log('c')});
+	}
+/* 
+ */
+	function test2(){
+	 document.getElementById('a').addEventListener('click',function(){console.log('a')},true);
+	 document.getElementById('b').addEventListener('click',function(){console.log('b')},true);
+	 document.getElementById('c').addEventListener('click',function(){console.log('c')},true);
+	}
+
+	function test3(){
+	 document.getElementById('a').addEventListener('click',function(){console.log('a')});
+	 document.getElementById('b').addEventListener('click', function(evt){
+	                                                            evt.stopPropagation(); // 이후부터 이벤트차단
+	                                                            console.log('b')});
+	 document.getElementById('c').addEventListener('click',function(){console.log('c')});
+	}
+</script>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<div id='a'>a Click하세요
+ <div id='b'>b Click하세요
+   <div id='c'>c Click하세요</div>
+ </div>
+</div>
+	<input type="button" value="1번" onClick="test1()" />
+	<input type="button" value="2번" onClick="test2()" />
+	<input type="button" value="3번" onClick="test3()" />
+</body>
+</html>

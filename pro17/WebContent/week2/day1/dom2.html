@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+//window가 로드 된 다음에 function을 담아야 한다
+	function myFunction(){
+		var textnode = document.createTextNode("Water");
+		var item=document.getElementById("myList").childNodes[0];
+		item.replaceChild(textnode,item.childNodes[0]);//엔터와 스페이스도 텍스트노드로 잡힌다
+																		//mylist 밑에 엔터나 들여쓰기 되어 있으면 에러 생김
+	}
+	
+	function countTags(n){
+	//문서의 노드순회
+		var numtags =0;
+		if(n.nodeType==1){
+			numtags++;
+		}
+		var children = n.childNodes;
+		for(var i=0; i<children.length;i++){
+			numtags+=countTags(children[i]);
+		}
+		return numtags;
+	}
+	
+	//노드 아래의 모든 텍스트 얻기
+	function getText(n){
+		//text노드를 이어붙이고 문자열로 반환
+		var strings=[];
+		getStrings(n,strings);
+		return strings.join(" ");
+		//return strings;
+
+		//  //모든 텍스트 노드를 찾고, 노드의 텍스트를 배열에 추가 (재귀함수)
+		function getStrings(n,strings){
+			if(n.nodeType==3){
+				strings.push(n.data);
+			}else if(n.nodeType==1){
+		          //firstChild와 lastChild는 노드의 첫번째와 마지막 자식을 참조
+	            //nextSibling과 previousSibling은 노드의 인접한 형제 노드를 참조
+				for(var m=n.firstChild; m!=null; m=m.nextSibling){
+					getStrings(m,strings);
+				}
+			}
+		}
+	}
+	
+	function test(){
+		var strAllText = getText(document.getElementById("myList"));
+		console.log(strAllText);
+	}
+</script>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body onload="console.log(countTags(document))"> <!--  document : 문서의 최상단 -->
+	<ul id="myList"><li>Coffee</li><li>Tea</li><li>Milk</li></ul>
+	<button onclick="window.onload=myFunction()">Try it</button>
+	<button onclick="window.onload=test()">Try</button>
+	<br>this is a <i>sample</i> document.
+</body>
+</html>

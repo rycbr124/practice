@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+	function check_if(){
+		var date = new Date();
+		var hour = date.getHours();
+		
+		if(hour<11){
+			alert('아침 먹을 시간입니다.');
+		}else if(hour<15){
+			alert('점심 먹을 시간입니다.');
+		}else{
+			alert('저녁 먹을 시간입니다.')
+		}	
+	}
+	
+	function check_switch(){
+		var input = Number(prompt('숫자를 입력하세요.','숫자'));
+		
+		switch(input % 2){
+			case 0:	
+				alert('짝수입니다.');
+				break;
+			case 1:	
+				alert('홀수입니다.');
+				break;
+			default:	
+				alert('숫자가 아닙니다.');
+				break;
+		}
+		
+	}
+</script>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<input type="button"  value="if" onClick="check_if()"	/>
+	<input type="button"  value="switch" onClick="check_switch()"	/>
+</body>
+</html>

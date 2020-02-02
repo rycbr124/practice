@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+	$(document).ready(function(){
+		
+		$('#test1').click(function (){
+			var html=$('h1').html();
+			var text=$('h1').text();
+			console.log("html\n"+html);
+			console.log("text\n"+text);			
+		});
+		
+		$('#test2').click(function (){
+			$('div').html('<h1>$().html() Method</h1>');
+			$('h1').html(function(index,html){
+				return '★' + html + '★';
+			});
+			
+		});
+		
+	});
+</script>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>Header-0</h1>
+	<h1>Header-1</h1>
+	<h1>Header-2</h1>
+	
+	<div></div>
+	<div></div>
+	<div></div>
+	
+	<input type="button" value="getter" id="test1">
+	<input type="button" value="setter" id="test2">
+</body>
+</html>

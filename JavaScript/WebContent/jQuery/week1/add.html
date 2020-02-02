@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+	function test1(){
+		 $("p").add("div").css({"border":"2px solid green"});
+		// $("p").css({"margin-top":"3px"});
+	}
+	
+	function test2(){
+		 $("div#after").find("p").addBack().css({"backgroundColor": "aqua"});
+	}
+</script>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<p>안녕하세요.</p>
+	<span>데브쿠마입니다.</span>
+	<div>반갑습니다.</div>
+	
+	<div id="after">
+		<p>.addBack() 적용 후</p>
+		<p>안녕하세요. 데브쿠마입니다.</p>
+	</div>
+	
+	<input type="button" value="1번" onclick="test1()">
+	<input type="button" value="2번" onclick="test2()">
+</body>
+</html> 

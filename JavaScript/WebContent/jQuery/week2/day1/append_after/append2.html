@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+	$( document ).ready( function() {
+		$("#test1").click(function (){
+			  $( 'p' ).append( $( 'strong' ) );
+		});
+		$("#test2").click(function (){
+			   $( 'h1' ).after( $( 'p' ) );
+		});
+	});
+</script>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+ <p>abc</p>
+ <strong>XYZ</strong>
+ 	
+ <p>Goodbye World!</p>
+ <h1>Lorem ipsum dolor.</h1> 	
+
+ 	<input type="button" value="getter" id="test1">
+	 <input type="button" value="getter" id="test2">
+</body>
+</html>

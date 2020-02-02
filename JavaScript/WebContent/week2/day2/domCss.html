@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+	function styleHeaderSiblings(){
+		if(!document.getElementsByTagName){
+			return false;
+		}
+		var headers = document.getElementsByTagName("h1"); //모든 h1 tag를 얻는다.
+		for(var i =0; i<headers.length;i++){
+			//첫 번재 요소 노드에 css 지정
+			var elem = getNextElement(headers[i].nextSibling); //nextSibling  다음 요소노드로 이동
+			elem.style.fontWeight="bold";
+			elem.style.fontSize = "1.2em";
+		}
+	}
+	
+	//다음 요소노드가 나올 때 까지 재귀호출
+	function getNextElement(node){
+		if(node.nodeType==1){
+			return node;
+		}
+		if(node.nextSibling){
+			return getNextElement(node.nextSibling);
+		}
+		return null;
+	}
+</script>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>첫번째 제목</h1>
+	<p>이것은 첫번째 단락입니다.</p>
+	<p>테스트1</p>
+	<h1>두번째 제목</h1>
+	<p>이것은 두번째 단락입니다.</p>
+	<p>테스트2</p>
+<input type="button"	value="test" onclick="styleHeaderSiblings()">
+
+</body>
+</html>

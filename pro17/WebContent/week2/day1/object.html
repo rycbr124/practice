@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+	function test1(){
+	//defineProperty()
+		var object={};
+		Object.defineProperty(object,'name',{
+			value:'홍길동', //속성값
+			writable:false, //속성값 변경여부
+			enumerable:false, //for in문에 검색여부
+			configurable:true //속성설정 변경여부
+		});
+		object.name='OTHER';
+		for(var l in object){
+			console.log(l+":"+object[l]);
+		}
+		console.log(object); //{name: "홍길동"}
+	}
+	
+	function test1_2(){
+	//defineProperties(): 한 번에 여러개의 property 추가
+		var object={};
+		Object.defineProperties(object,{
+			name:{value:'김길동'},
+			region:{value:'서울특별시'}
+		});
+		console.log(object);
+	}
+	
+	function test2(){
+	//get set
+		var object={};
+		var value="test";
+		Object.defineProperty(object,'name',{
+			get:function(){
+				console.log("getter");
+				return value;
+			},
+			set:function(newValue){
+				console.log("setter");
+				value=newValue;
+			}
+		});
+		object.name='ALPHA';
+		console.log(object.name);
+	}
+	
+	function test3(){
+	//create :  기존의 객체를 복제하고 새로운 속성을 추가하여 객체생성
+		var object=Object.create({},{
+			name:{value:'김길동',enumerable:true},
+			region:{value:'서울특별시',enumerable:true}
+		});
+		console.log(Object.keys(object));
+		var person=Object.create(object,{
+			gender:{value:'남자',enumerable:true},
+			hobby:{value:'기타',enumerable:true}
+		})
+		console.log(Object.keys(person));
+		console.log(Object.values(person));
+	}
+	
+	function test4(){
+	//hasOwnProperty
+		function Dog(color,name,age,family){
+			this.color=color;
+			this.name=name;
+			this.age=age;
+			this.family=family;
+			this.breed=function(){
+				return this.color+" "+this.family;
+			}
+		}
+		var myDog = new Dog("검정색","곰", 3 , "불독");
+		console.log(myDog.hasOwnProperty("color"))//true
+		console.log(myDog.hasOwnProperty("class"));//false 상속받은 프로퍼티이므로, false를 반환함.
+	}
+	function test5(){
+	//propertyIsEnumerable : hasOwnProperty()가 true이면서 열거가능
+		function Dog(color,name,age,family){
+			this.color=color;
+			this.name=name;
+			this.age=age;
+		}
+		var myDog = new Dog("흰색","마루",1)
+		//color 프로퍼티의 enumerable 속성을 false로 설정함.
+		Object.defineProperty(myDog,"color",{enumerable:false});
+		console.log(myDog.propertyIsEnumerable("color")); //false
+		console.log(myDog.propertyIsEnumerable("name")); //false
+	}
+	
+	function test6(){
+	//isPrototypeOf : 특정 객체의 프로토타입 체인에 현재 객체가 존재하는지 검사
+		var day = new Date();//Date 객체를 생성함.
+		//객체 day의 프로토타입이 Date.prototype인지를 검사함.
+		console.log(Date.prototype.isPrototypeOf(day));//true
+		console.log(Date.prototype.isPrototypeOf(new String())); //false
+	}
+	
+	function test7(){
+	//isExtensible : 객체에 새로운 프로퍼티를 추가할 수 있는지 여부
+	//preventExtensions : 새로운 프로퍼티를 추가할 수 없도록 처리함
+		var day = new Date();
+		console.log(Object.isExtensible(day));//true
+		var myDay=Object.preventExtensions(day);
+		console.log(Object.isExtensible(day));//false
+	}
+	
+	function test8(){
+	//isSealed:프로퍼티를 삭제할 수 있는지 여부
+	//seal : 프로퍼티를 삭제할 수 없도록 처리함.
+		var person={
+			name:'홍길동',
+			region:'서울특별시',
+			hobby:'기타'
+		};
+		Object.seal(person);
+		delete person.name;
+		console.log(Object.isSealed(person));
+		console.log(person);
+	}
+	function test9(){
+	//keys : 자신의 속성을 배열로 리턴(열거가능만)
+	//getOwnPropertyNames : 모든 속성을 배열로 리턴
+		var object={name:'윤인성'};
+		Object.defineProperty(object,'region',{
+			value:'서울특별시'
+		});
+		console.log(Object.keys(object));
+		console.log(Object.getOwnPropertyNames(object));
+	}
+</script>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<input type="button" value="1번" onClick="test1()" />
+	<input type="button" value="1-2번" onClick="test1_2()" />
+	<input type="button" value="2번" onClick="test2()" />
+	<input type="button" value="3번" onClick="test3()" />
+	<input type="button" value="4번" onClick="test4()" />
+	<input type="button" value="5번" onClick="test5()" />
+	<input type="button" value="6번" onClick="test6()" />
+	<input type="button" value="7번" onClick="test7()" />
+	<input type="button" value="8번" onClick="test8()" />
+	<input type="button" value="9번" onClick="test9()" />
+</body>
+</html>
