@@ -10,7 +10,7 @@
 ![1_1](image/1_1.png)
 
 ## 2. DOM을 이용해 HTML 요소를 간단하게 만들어주는 make 함수 (JavaScript)
-~~~cs
+~~~javascript
 function make(tagname, attributes, children)
 /*
  tagname: tag이름
@@ -38,7 +38,7 @@ body.appendChild(table);
 ![3-1_2](image/3-1_2.png)
 ![3-1_3](image/3-1_3.png)
 
-~~~cs
+~~~javascript
 var tree = new BSTree();
 
 tree.insert(11);
@@ -72,7 +72,7 @@ console.log(tree.min());
 
 ![3-2_1](image/3-2_1.png)
 
-~~~cs
+~~~javascript
 var source = new Stack();
 source.push(3);
 source.push(2);
