@@ -36,40 +36,42 @@
 
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script>
-	$(document).ready(function (){
+	$(document).ready(function (){//문서 시작 시 click 이벤트 삽입
 		var nowDate;//현재 선택된 시간
 		var inputDate;//폼에서 최초로 넘어온 시간
 		var nowCheck;//최초 입력값 확인 boolean
-		$("#show").click(function (){
+		$("#show").click(function (){//달력 출력 버튼 클릭
 			if(inputCheck()){
-				inputDate=new Date(frmCal.input_date.value);
-				nowDate=inputDate;
+				//input_date를 빈칸없이 입력했을 경우 
+				inputDate=new Date(frmCal.input_date.value);//입력 날짜를 담은 date 객체 생성
+				nowDate=inputDate;//보여줄 날짜 input 값으로 지정
 				nowCheck=false;
-				show(inputDate,inputDate,nowCheck);
+				show(inputDate,inputDate,nowCheck);//달력 출력 메소드 호출
 			};
 		});
 		
-		$("#show_now").click(function (){
-			inputDate=new Date();
-			nowDate=inputDate;
+		$("#show_now").click(function (){//현재 시간 입력 버튼 클릭
+			inputDate=new Date();//현재시간 기준 date 객체 생성
+			nowDate=inputDate;//보여줄 날짜 현재시간으로 지정
 			nowCheck=true;
-			show(inputDate,inputDate,nowCheck);
+			show(inputDate,inputDate,nowCheck);//달력 출력 메소드 호출
 		});
 		
-		$("#before").click(function (){
-			$("td").parent('tr').remove();
-			nowDate=new Date(nowDate.getFullYear(),nowDate.getMonth()-1);
+		$("#before").click(function (){//왼쪽 화살표 클릭 시 지난달 출력
+			$("td").parent('tr').remove();//기존에 출력된 달력 제거
+			nowDate=new Date(nowDate.getFullYear(),nowDate.getMonth()-1);//보여줄 날짜를 지난달로 지정
 			show(nowDate,inputDate,nowCheck);
 		});
 		
-		$("#after").click(function (){
+		$("#after").click(function (){//오른쪽 화살표 클릭 시 다음달 출력
 			$("td").parent('tr').remove();
 			nowDate=new Date(nowDate.getFullYear(),nowDate.getMonth()+1);
 			show(nowDate,inputDate,nowCheck);
 		});
 	});
 	
-	function Holiday(date){
+	//휴일 정보 저장 및 휴일여부 체크
+	function Holiday(/*확인하려는 날짜가 담긴 Date 인스턴스*/date){
 		var list={
 			1:[1],
 			2:[],
@@ -83,24 +85,31 @@
 			10:[3,9],
 			11:[],
 			12:[25]
-		}
-		var monthList=list[date.getMonth()+1];
+		}//지정 휴일 목록을 담은 객체, key=월/value=(key)월의 휴일일자 배열
 		
-		this.isHoliday=function(day){
+		var monthList=list[date.getMonth()+1];
+		//파라미터로 받은 date 값의 월을 가져와서,
+		//휴일 목록 객체에 key값으로 넣어 해당달의 휴일 일자 배열을 추출한다.
+		
+		//휴일 체크 메소드
+		this.isHoliday=function(day){//일자를 받아 휴일 배열과 비교
 			for(var i in monthList){
-				if(monthList[i]==day){
+				if(monthList[i]==day){//들어온 일자가 휴일 배열 목록에 있으면 true 리턴
 					return true;
 				}
 			}
-			return false;
+			return false;//배열 목록에 없으면 false 리턴
 		}
 	}
 	
+	//date 입력값 validation
 	function inputCheck(){
 		if(frmCal.input_date.value===''){
+			//연,월,일 중에 빈값이 있을 경우 비어있는 값으로 넘어옴
 			alert("정확한 날짜를 입력하세요");
 			return false;		
 		}else{
+			//연월일 전부 입력시 true 리턴
 			return true;
 		}
 	}
@@ -109,57 +118,62 @@
 		$('#frmCal').css('display','none');//form 화면에서 제거
 		$('table').css('display','block');//table 화면에 표시		
 
-		var year=input.getFullYear();//년
+		var year=input.getFullYear();//연
 		var month=input.getMonth()+1;//월
 		var day=input.getDate();//일
 		var day_of_week=(new Date(year,month-1,1)).getDay();//월의 시작요일
 		var last_day=(new Date(year,month,0)).getDate();//월의 마지막 날짜
 
 		
-		$('span').html(year+'년 '+month+'월');
+		$('span').html(year+'년 '+month+'월');//제목에 입력값의 연,월 출력
 
-		//시작 날짜의 요일만큼 공백을 찍어준다.
 		var tr=document.createElement('tr');
 		$('table').append(tr);
+		//시작 날짜의 요일만큼 공백을 찍어준다.
 		for(var k=1;k<=day_of_week;k++){
 			var td=document.createElement('td');
 			tr.append(td);
 		}
 		
-		var check=dateCheck(input,checkDate);
-		var holiday=new Holiday(input);
+		var check=dateCheck(input,checkDate);//출력하려는 날짜와 최초에 입력했던 날짜가 같은지 비교
+		var holiday=new Holiday(input);//휴일 확인을 위한 Holiday 객체 생성
 		for(var i=1,j=day_of_week; i<=last_day ; i++,j++){
-			if(j===7){//요일 인덱스 초기화
-				tr=document.createElement('tr');
-				$('table').append(tr);
-				j=0;
+			//i=일자 인덱스, j=요일 인덱스, 1일부터 달의 마지막 일까지 반복
+			if(j===7){
+				//일요일
+				tr=document.createElement('tr');//새로운 테이블 행 생성
+				$('table').append(tr);//테이블에 새로운 행 삽입
+				j=0;//요일 인덱스 초기화
 			}
 
-			var td=document.createElement('td');
-			$(td).text(i);	
+			var td=document.createElement('td');//테이블 열 생성
+			$(td).text(i);//테이블 열에 일자 텍스트 입력
 			
 			if(j==0 || j==6 || holiday.isHoliday(i)){
-				$(td).css('color','red');
+				//토요일이거나 일요일이거나 휴일일 경우
+				$(td).css('color','red');//일자를 빨간색으로 표시
 			}
 			
 			if(check && i==checkDate.getDate()){
-				$(td).css('color','blue');
+				//출력하려는 날짜가 최초 입력값일 경우
+				$(td).css('color','blue');//일자를 파란색으로 표시
 				if(checkBoolean){
-					var div=document.createElement('div');
-					$(td).append(div);
-					$(div).css('color','purple');
-					var time=checkDate.toLocaleTimeString('ko-KR');
-					$(div).text(time.substring(0,time.lastIndexOf(':')));
+					//최초 입력버튼이 현재시간입력일 경우 시간까지 표시
+					var div=document.createElement('div');//시간정보를 담을 노드 생성
+					$(td).append(div);//열에 노드 삽입
+					$(div).css('color','purple');//날짜 글씨색을 보라색으로 지정
+					var time=checkDate.toLocaleTimeString('ko-KR');//한국식 일자로 표시 변환
+					$(div).text(time.substring(0,time.lastIndexOf(':')));//초단위 제외하고 입력
 				}
 			}
-			tr.append(td);
-		}
-
-	}
+			tr.append(td);//일자정보를 담은 하나의 열을 행에 삽입
+		}//end for
+	}//end function
 	
-	function dateCheck(inputDate,checkDate){
+	function dateCheck(/*폼에서 최초로 넘어온 Date 객체*/inputDate,/*출력하려는 Date 객체*/checkDate){
 		if(inputDate.getFullYear()==checkDate.getFullYear()){
-			return inputDate.getMonth()==checkDate.getMonth();
+			//inputDate와 checkDate의 년도가 같을 때
+			return inputDate.getMonth()==checkDate.getMonth();//월까지 같으면 true를 리턴
 		}else{
 			return false
 		}
